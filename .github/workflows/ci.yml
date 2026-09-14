@@ -1,9 +1,14 @@
 name: CI
-on: [push, pull_request]
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
 jobs:
   check:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - name: Every skill folder has a SKILL.md
-        run: for d in */; do [ -f "${d}SKILL.md" ] || { echo "Missing SKILL.md in $d"; exit 1; }; done; echo ok
+        run: for d in */; do [ -f "${d}SKILL.md" ] || { echo "Missing SKILL.md in $d"; exit 1; }; done
